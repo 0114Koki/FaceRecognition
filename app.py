@@ -51,8 +51,7 @@ def handle_message(event):
 
 # 以下の関数を追記
 @handler.add(MessageEvent, message=ImageMessage)
-def handle_image(event):
-    # LINEチャネルを通じてメッセージを返答
+def handle_image(event):# LINEチャネルを通じてメッセージを返答
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text='画像です')
