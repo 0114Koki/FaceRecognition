@@ -8,7 +8,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, ImageMessage
 )
 
 app = Flask(__name__)
@@ -49,6 +49,14 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text=event.message.text))
 
+# 以下の関数を追記
+@handler.add(MessageEvent, message=ImageMessage)
+def handle_image(event):
+    # LINEチャネルを通じてメッセージを返答
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text='画像です')
+    )
 
 if __name__ == "__main__":
     app.run()
